@@ -89,11 +89,15 @@ void testApp::setup(){
     vidGraber.initGrabber(w,h);
 #endif
     
+    gui.setup();
+	gui.add(threshold.setup( "threshold", 140, 10, 255));
+
+    
     
     colorImg.allocate(w,h);
     grayImg.allocate(w, h);
     
-    ofSetWindowShape(w*2, h*2);
+    ofSetWindowShape(w*2, h);
 }
 
 //--------------------------------------------------------------
@@ -115,7 +119,7 @@ void testApp::update(){
     
     grayImg = colorImg;
     grayImg.blur();
-    grayImg.threshold(200);
+    grayImg.threshold(threshold);
     
     //get pixcles
     unsigned char* grayPix = grayImg.getPixels();
@@ -153,6 +157,7 @@ void testApp::update(){
         findAdjacentLines(&myLine);
     }
     
+    
 }
 
 //--------------------------------------------------------------
@@ -172,6 +177,9 @@ void testApp::draw(){
         myBlob[i].drawRect();
         ofPopMatrix();
     }
+    
+    
+    gui.draw();
     
     cout<<"Blob Number: "<<myBlob.size()<<endl;
     

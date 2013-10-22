@@ -6,7 +6,8 @@
 #include "lines.h"
 #include "blobs.h"
 #include "ofxGui.h"
-//#define _USE_LIVE_VIDEO
+
+#define _USE_LIVE_VIDEO
 
 class testApp : public ofBaseApp{
     
@@ -40,9 +41,11 @@ public:
     
     int                         w; 
     int                         h;
+
     char                        charValue;
     vector<lines>               myLine;
     vector<blobs>               myBlob;
     
     ofxPanel                    gui;
+    ofxFloatSlider              threshold;
 };
